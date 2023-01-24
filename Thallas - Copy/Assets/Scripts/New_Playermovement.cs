@@ -1,0 +1,173 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class New_Playermovement : MonoBehaviour
+{
+
+    public float speed = 4f;
+    Rigidbody2D rb;
+    bool facingRight = true;
+
+    bool isGrounded;
+    public Transform groundCheck;
+    public float checkRadius;
+    public LayerMask whatIsGround;
+    public float jumpForce;
+
+    private Animator anim;
+
+    private float activeMoveSpeed = 4f ;
+    public float dashSpeed;
+    public float dashLength = 0.5f, dashCooldown = 1f;
+    private float dashCounter;
+    private float dashCoolCounter;
+
+    bool isTouchingFront;
+	public Transform frontCheck;
+    public LayerMask whatIsMossWall;
+	bool wallSliding;
+	public float wallSlidingSpeed;
+
+    bool wallJumping;
+    public float xWallForce;
+    public float yWallForce;
+    public float wallJumpTime;
+    public float wallJumpCooldown = 2f;
+    public bool wallJumpReady;
+    public float wallJumpCDCurrent = 0f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        activeMoveSpeed = speed;
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float input = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(input * speed, rb.velocity.y);
+
+        if(input != 0)
+        {
+            anim.SetBool("Run", true);
+        }
+        else
+        {
+            anim.SetBool("Run", false);
+        }
+
+        if(input > 0 && facingRight == false)
+        {
+            Flip();
+        }
+        else if (input < 0 && facingRight == true)
+        {
+            Flip();
+        }
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+        }
+
+        if (isGrounded == false)
+        {
+            anim.SetBool("IsJump", true);
+        }
+        else
+        {
+            anim.SetBool("IsJump", false);
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            anim.SetBool("Dash", true);
+            if(dashCoolCounter <=0 && dashCounter <=0)
+            {
+                speed = dashSpeed;
+                dashCounter = dashLength;
+            }
+        }
+
+        if (dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+
+            if (dashCounter <= 0 )
+            {
+                anim.SetBool("Dash", false);
+                speed = activeMoveSpeed;
+                dashCoolCounter = dashCooldown;
+            }
+        }
+
+        if (dashCoolCounter > 0)
+        {
+            anim.SetBool("Dash", false);
+            dashCoolCounter -= Time.deltaTime;
+        }
+
+        isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, whatIsMossWall);
+
+		if(isTouchingFront == true && isGrounded == false && input !=0)
+		{
+            anim.SetBool("OnWall", true);
+            anim.SetBool("IsJump", false);
+			wallSliding = true;
+		}
+		else
+		{
+            anim.SetBool("OnWall", false);
+			wallSliding = false;
+		}
+
+		if(wallSliding)
+		{
+			rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+
+        if(wallJumpCDCurrent >= wallJumpCooldown)
+        {
+            wallJumpReady = true;
+        }
+        else
+        {   
+            wallJumpCDCurrent +=Time.deltaTime;
+            wallJumpReady = false;
+            wallJumpCDCurrent = Mathf.Clamp(wallJumpCDCurrent, 0f, wallJumpCooldown);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space) && wallSliding == true && wallJumpReady)
+        {
+            wallJumping = true;
+            Invoke("SetWallJumpingToFalse", wallJumpTime);
+            wallJumpCDCurrent = 0f;
+        }
+
+        if(wallJumping == true)
+        {
+            rb.velocity = new Vector2(xWallForce * -input, yWallForce);
+        }
+
+
+    }
+
+    void Flip()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        facingRight = !facingRight;
+    }
+
+
+
+    void SetWallJumpingToFalse()
+    {
+        wallJumping = false;
+    }
+}
