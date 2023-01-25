@@ -15,6 +15,12 @@ public class New_Playermovement : MonoBehaviour
     public LayerMask whatIsGround;
     public float jumpForce;
 
+    public float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
+    public float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter;
+
     private Animator anim;
 
     private float activeMoveSpeed = 4f ;
@@ -71,18 +77,41 @@ public class New_Playermovement : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        if(isGrounded)
         {
-            rb.velocity = Vector2.up * jumpForce;
-        }
-
-        if (isGrounded == false)
-        {
-            anim.SetBool("IsJump", true);
+            coyoteTimeCounter = coyoteTime;
         }
         else
         {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+        
+
+        if( jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+
+            jumpBufferCounter = 0f;
+        }
+
+        if (coyoteTimeCounter > 0f)
+        {
             anim.SetBool("IsJump", false);
+        }
+        else
+        {
+            anim.SetBool("IsJump", true);
+
+            coyoteTimeCounter = 0f;
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift))

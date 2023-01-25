@@ -45,11 +45,10 @@ public class PlayerDeath : MonoBehaviour
     {
         if(collision.tag == "Egel")
         {
+            GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
             anim.SetTrigger("death");  
-            deathCount = deathCount + 1; 
-            transform.position = respawnPoint;
-            anim.SetTrigger("respawn");
-            //StartCoroutine(death());
+            deathCount = deathCount + 1;
+             
         }
         else if(collision.tag == "RespawnPoint")
         {
@@ -57,15 +56,19 @@ public class PlayerDeath : MonoBehaviour
         }
     }
 
-    //IEnumerator death()
-    //{
-        //anim.SetTrigger("death");
-        //GameObject.Find("Player").GetComponent<New_Playermovement>().enabled = false;
-       // yield return new WaitForSeconds(3.0f);
-        //transform.position = respawnPoint;
-        //anim.SetTrigger("respawn");
-        //yield return new WaitForSeconds(3.0f);
-        //GameObject.Find("Player").GetComponent<New_Playermovement>().enabled = true; 
-        //deathCount = deathCount + 1; 
-    //}
+    void respawn()
+    {
+        StartCoroutine(death());
+    }
+
+
+    IEnumerator death()
+    {
+        transform.position = respawnPoint;
+        anim.SetTrigger("respawn");
+        yield return new WaitForSeconds(1.5f);
+        GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true;
+        anim.SetBool("Run", true);
+        
+    }
 }

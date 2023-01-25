@@ -12,9 +12,9 @@ public class StopPlayerMovement : MonoBehaviour
 
     IEnumerator Wait()
     {
-        GameObject.Find("Player").GetComponent<New_Playermovement>().enabled = false;
+        GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
         yield return new WaitForSeconds(6.7f);
-        GameObject.Find("Player").GetComponent<New_Playermovement>().enabled = true; 
+        GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
     }
         
 
