@@ -48,7 +48,9 @@ public class PlayerDeath : MonoBehaviour
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
             anim.SetTrigger("death");  
             deathCount = deathCount + 1;
-             
+    
+            
+            
         }
         else if(collision.tag == "RespawnPoint")
         {
