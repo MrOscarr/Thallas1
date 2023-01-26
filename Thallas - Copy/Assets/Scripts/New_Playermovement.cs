@@ -23,7 +23,7 @@ public class New_Playermovement : MonoBehaviour
 
     private Animator anim;
 
-    private float activeMoveSpeed = 4f ;
+    private float activeMoveSpeed = 4f;
     public float dashSpeed;
     public float dashLength = 0.5f, dashCooldown = 1f;
     private float dashCounter;
@@ -122,6 +122,18 @@ public class New_Playermovement : MonoBehaviour
                 speed = dashSpeed;
                 dashCounter = dashLength;
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.W))
+        {
+
+            anim.SetBool("Dash", true);
+            if(dashCoolCounter <=0 && dashCounter <=0)
+            {
+                speed = dashSpeed;
+                dashCounter = dashLength;
+            }
+            
         }
 
         if (dashCounter > 0)

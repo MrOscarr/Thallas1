@@ -45,11 +45,10 @@ public class PlayerDeath : MonoBehaviour
     {
         if(collision.tag == "Egel")
         {
-            GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
-            anim.SetTrigger("death");  
+            anim.SetTrigger("death");
+            GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false; 
             deathCount = deathCount + 1;
     
-            
             
         }
         else if(collision.tag == "RespawnPoint")
@@ -67,10 +66,11 @@ public class PlayerDeath : MonoBehaviour
     IEnumerator death()
     {
         transform.position = respawnPoint;
+        anim.SetBool("Run", false);
         anim.SetTrigger("respawn");
         yield return new WaitForSeconds(1.5f);
         GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true;
-        anim.SetBool("Run", true);
-        
+        anim.SetBool("Idle", true);
+
     }
 }
