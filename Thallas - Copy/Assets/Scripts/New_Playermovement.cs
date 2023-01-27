@@ -4,7 +4,28 @@ using UnityEngine;
 
 public class New_Playermovement : MonoBehaviour
 {
+    
+	[HideInInspector] public float gravityStrength; //Downwards force (gravity) needed for the desired jumpHeight and jumpTimeToApex.
+	[HideInInspector] public float gravityScale; //Strength of the player's gravity as a multiplier of gravity (set in ProjectSettings/Physics2D).
+										  //Also the value the player's rigidbody2D.gravityScale is set to.
+	
+	public float fallGravityMult; //Multiplier to the player's gravityScale when falling.
+	public float maxFallSpeed; //Maximum fall speed (terminal velocity) of the player when falling.
 
+	public float runMaxSpeed; //Target speed we want the player to reach.
+	public float runAcceleration; //The speed at which our player accelerates to max speed, can be set to runMaxSpeed for instant acceleration down to 0 for none at all
+	[HideInInspector] public float runAccelAmount; //The actual force (multiplied with speedDiff) applied to the player.
+	public float runDecceleration; //The speed at which our player decelerates from their current speed, can be set to runMaxSpeed
+	[HideInInspector] public float runDeccelAmount; //Actual force (multiplied with speedDiff) applied to the player .
+	
+	[Range(0f, 1)] public float accelInAir; //Multipliers applied to acceleration rate when airborne.
+	[Range(0f, 1)] public float deccelInAir;
+	
+
+	public float jumpHeight; //Height of the player's jump
+	public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the player's gravity and jump force.
+	[HideInInspector] public float jumpForce; //The actual force applied (upwards) to the player when they jump.
+	
     public float speed = 4f;
     Rigidbody2D rb;
     bool facingRight = true;
@@ -13,7 +34,7 @@ public class New_Playermovement : MonoBehaviour
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
-    public float jumpForce;
+
 
     public float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
@@ -50,13 +71,55 @@ public class New_Playermovement : MonoBehaviour
         activeMoveSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+    
+    
     }
+
+    private void OnValidate()
+    {
+		//Calculate gravity strength using the formula (gravity = 2 * jumpHeight / timeToJumpApex^2) 
+		gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
+		
+		//Calculate the rigidbody's gravity scale (ie: gravity strength relative to unity's gravity value, see project settings/Physics2D)
+		gravityScale = gravityStrength / Physics2D.gravity.y;
+
+		//Calculate are run acceleration & deceleration forces using formula: amount = ((1 / Time.fixedDeltaTime) * acceleration) / runMaxSpeed
+		runAccelAmount = (50 * runAcceleration) / runMaxSpeed;
+		runDeccelAmount = (50 * runDecceleration) / runMaxSpeed;
+
+		//Calculate jumpForce using the formula (initialJumpVelocity = gravity * timeToJumpApex)
+		jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
+
+		
+		runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
+		runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
+		
+	}
 
     //START RUN//
     void Update()
     {
         float input = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(input * speed, rb.velocity.y);
+        float targetSpeed = input * runMaxSpeed;
+
+        float accelRate;
+
+        if (coyoteTime > 0)
+		{
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? runAccelAmount : runDeccelAmount;
+        }
+		else
+		{
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? runAccelAmount * accelInAir : runDeccelAmount * deccelInAir;
+        }
+
+        float speedDif = targetSpeed - rb.velocity.x;
+
+		float movement = speedDif * accelRate;
+
+		rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
+
+
 
         if(input != 0)
         {
@@ -101,9 +164,21 @@ public class New_Playermovement : MonoBehaviour
 
         if( jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
-            rb.velocity = Vector2.up * jumpForce;
+            float force = jumpForce;
+		    if (rb.velocity.y < 0)
+            {
+                force -= rb.velocity.y;
+                rb.gravityScale = gravityScale * fallGravityMult;
+            }
+            else
+            {
+                rb.gravityScale = gravityScale;
+            }
+
+		    rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 
             jumpBufferCounter = 0f;
+
         }
 
         if (coyoteTimeCounter > 0f)
