@@ -25,6 +25,7 @@ public class New_Playermovement : MonoBehaviour
 
     private float activeMoveSpeed = 4f;
     public float dashSpeed;
+    public float dashSpeedUp;
     public float dashLength = 0.5f, dashCooldown = 1f;
     private float dashCounter;
     private float dashCoolCounter;
@@ -43,7 +44,7 @@ public class New_Playermovement : MonoBehaviour
     public bool wallJumpReady;
     public float wallJumpCDCurrent = 0f;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         activeMoveSpeed = speed;
@@ -51,7 +52,7 @@ public class New_Playermovement : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    //START RUN//
     void Update()
     {
         float input = Input.GetAxisRaw("Horizontal");
@@ -74,7 +75,9 @@ public class New_Playermovement : MonoBehaviour
         {
             Flip();
         }
+        //END RUN//
 
+        //START COYOTE&JUMPBUFFER//
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
         if(isGrounded)
@@ -113,28 +116,30 @@ public class New_Playermovement : MonoBehaviour
 
             coyoteTimeCounter = 0f;
         }
+        //END COYOTE&JUMPBUFFER//
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        //START DASH//
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             anim.SetBool("Dash", true);
             if(dashCoolCounter <=0 && dashCounter <=0)
             {
-                speed = dashSpeed;
-                dashCounter = dashLength;
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.W))
-        {
-
-            anim.SetBool("Dash", true);
-            if(dashCoolCounter <=0 && dashCounter <=0)
-            {
-                speed = dashSpeed;
+                speed = dashSpeedUp;
+                rb.velocity = new Vector2(rb.velocity.x, transform.localScale.y * speed);
                 dashCounter = dashLength;
             }
             
         }
+
+        if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("Dash", true);
+                if(dashCoolCounter <=0 && dashCounter <=0)
+                {
+                    speed = dashSpeed;
+                    dashCounter = dashLength;
+                }
+            }
 
         if (dashCounter > 0)
         {
@@ -154,6 +159,9 @@ public class New_Playermovement : MonoBehaviour
             dashCoolCounter -= Time.deltaTime;
         }
 
+        //END DASH//
+
+        //START WALL SlIDING//
         isTouchingFront = Physics2D.OverlapCircle(frontCheck.position, checkRadius, whatIsMossWall);
 
 		if(isTouchingFront == true && isGrounded == false && input !=0)
@@ -172,7 +180,9 @@ public class New_Playermovement : MonoBehaviour
 		{
 			rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
+        //END WALL SlIDING//
 
+        //START WALL JUMP//
         if(wallJumpCDCurrent >= wallJumpCooldown)
         {
             wallJumpReady = true;
@@ -196,19 +206,22 @@ public class New_Playermovement : MonoBehaviour
             rb.velocity = new Vector2(xWallForce * -input, yWallForce);
         }
 
+        
 
     }
 
+    void SetWallJumpingToFalse()
+        {
+            wallJumping = false;
+        }
+    //END WALL JUMP//
+
+    //START FLIP//
     void Flip()
     {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         facingRight = !facingRight;
     }
+    //END FLIP//
 
-
-
-    void SetWallJumpingToFalse()
-    {
-        wallJumping = false;
-    }
 }

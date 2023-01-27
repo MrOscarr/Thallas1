@@ -13,7 +13,8 @@ public class PlayerDeath : MonoBehaviour
 
     private Animator anim;
 
-    // Start is called before the first frame update
+    public bool Respawn;
+
     void Start()
     {
         Skull1.enabled = false;
@@ -22,9 +23,10 @@ public class PlayerDeath : MonoBehaviour
         deathCount = 0f;
         respawnPoint = transform.position;
         anim = GetComponent<Animator>();
+        //Respawn = false;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if(deathCount == 1)
@@ -65,12 +67,15 @@ public class PlayerDeath : MonoBehaviour
 
     IEnumerator death()
     {
+        //Respawn = true;
         transform.position = respawnPoint;
         anim.SetBool("Run", false);
+        anim.SetBool("Idle", false);
         anim.SetTrigger("respawn");
         yield return new WaitForSeconds(1.5f);
         GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true;
         anim.SetBool("Idle", true);
+        //Respawn = false;
 
     }
 }
