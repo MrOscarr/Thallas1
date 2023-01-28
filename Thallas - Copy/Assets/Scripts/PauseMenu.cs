@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
     public GameObject pauseMenu;
     private PlayerDeath playerDeath;
+
     
     void Awake()
     {
@@ -42,14 +43,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     { 
-        if(playerDeath.IsRespawn == true)
+        if(playerDeath.IsRespawn == true || playerDeath.IsDeath == true)
         {
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
         }
-        if(playerDeath.IsRespawn == false)
+        if(playerDeath.IsRespawn == false || playerDeath.IsDeath == false)
         {
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
             pauseMenu.SetActive(false);

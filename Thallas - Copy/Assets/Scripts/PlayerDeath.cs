@@ -14,6 +14,7 @@ public class PlayerDeath : MonoBehaviour
     private Animator anim;
 
     public bool IsRespawn = false;
+    public bool IsDeath = false;
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if(collision.tag == "Egel")
         {
+            IsDeath = true;
             anim.SetTrigger("death");
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false; 
             deathCount = deathCount + 1;
@@ -66,6 +68,7 @@ public class PlayerDeath : MonoBehaviour
 
     void respawn()
     {
+        IsDeath = false;
         IsRespawn = true;
         StartCoroutine(death());
     }
@@ -73,11 +76,10 @@ public class PlayerDeath : MonoBehaviour
 
     IEnumerator death()
     {
-    
         transform.position = respawnPoint;
-        IsRespawn = true;
         anim.SetBool("Run", false);
         anim.SetBool("Idle", false);
+        anim.SetBool("Dash", false);
         anim.SetTrigger("respawn");
         yield return new WaitForSeconds(1.5f);
         GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true;
