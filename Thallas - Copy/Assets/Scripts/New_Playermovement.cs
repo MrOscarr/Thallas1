@@ -25,6 +25,10 @@ public class New_Playermovement : MonoBehaviour
 	public float jumpHeight; //Height of the player's jump
 	public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the player's gravity and jump force.
 	[HideInInspector] public float jumpForce; //The actual force applied (upwards) to the player when they jump.
+
+    public float dashMaxSpeed;
+    public float dashTimeToApex;
+    [HideInInspector] public float dashForce;
 	
     public float speed = 4f;
     Rigidbody2D rb;
@@ -90,6 +94,7 @@ public class New_Playermovement : MonoBehaviour
 		//Calculate jumpForce using the formula (initialJumpVelocity = gravity * timeToJumpApex)
 		jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
 
+        dashForce = Mathf.Abs(gravityStrength) * dashTimeToApex;
 		
 		runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
 		runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
@@ -212,6 +217,7 @@ public class New_Playermovement : MonoBehaviour
                 if(dashCoolCounter <=0 && dashCounter <=0)
                 {
                     speed = dashSpeed;
+                    rb.velocity = new Vector2(transform.localScale.x * speed, rb.velocity.y);
                     dashCounter = dashLength;
                 }
             }
