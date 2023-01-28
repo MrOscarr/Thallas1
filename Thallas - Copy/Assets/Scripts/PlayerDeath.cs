@@ -13,7 +13,7 @@ public class PlayerDeath : MonoBehaviour
 
     private Animator anim;
 
-    public bool Respawn = false;
+    public bool IsRespawn = false;
 
     void Start()
     {
@@ -23,8 +23,6 @@ public class PlayerDeath : MonoBehaviour
         deathCount = 0f;
         respawnPoint = transform.position;
         anim = GetComponent<Animator>();
-
-        Respawn = false;
     }
 
     
@@ -58,25 +56,34 @@ public class PlayerDeath : MonoBehaviour
         {
             respawnPoint = transform.position;
         }
+
+        if(collision.tag == "Start")
+        {
+            IsRespawn = true;
+        }
+
     }
 
     void respawn()
     {
-        Respawn = true;
+        IsRespawn = true;
         StartCoroutine(death());
     }
 
 
     IEnumerator death()
     {
+    
         transform.position = respawnPoint;
+        IsRespawn = true;
         anim.SetBool("Run", false);
         anim.SetBool("Idle", false);
         anim.SetTrigger("respawn");
         yield return new WaitForSeconds(1.5f);
         GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true;
         anim.SetBool("Idle", true);
-        Respawn = false;
+        IsRespawn = false;
 
     }
+
 }

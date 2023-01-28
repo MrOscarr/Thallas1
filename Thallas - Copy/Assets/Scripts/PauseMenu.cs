@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {   
 
-    
     public static bool isPaused = false;
     public GameObject pauseMenu;
-    PlayerDeath playerDeath;
+    private PlayerDeath playerDeath;
     
-    void start()
+    void Awake()
     {
         playerDeath = GameObject.Find("player").GetComponent<PlayerDeath>();
     }
@@ -43,17 +42,19 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     { 
-        GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
-
-        if(playerDeath.Respawn == true)
+        if(playerDeath.IsRespawn == true)
         {
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
+        }
+        if(playerDeath.IsRespawn == false)
+        {
+            GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;   
         }
     }
 
