@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerDeath : MonoBehaviour
 {
-    private float deathCount;
     private Vector3 respawnPoint;
     public Image Skull1;
-    public Image Skull2;
-    public Image Skull3;
+    public static int deathCount = 0;
+    [SerializeField] private Text deathText;
+    
 
     private Animator anim;
 
@@ -17,31 +17,12 @@ public class PlayerDeath : MonoBehaviour
 
     void Start()
     {
-        Skull1.enabled = false;
-        Skull2.enabled = false;
-        Skull3.enabled = false;
-        deathCount = 0f;
+        deathCount = 0;
         respawnPoint = transform.position;
         anim = GetComponent<Animator>();
     }
 
     
-    void Update()
-    {
-        if(deathCount == 1)
-        {
-            Skull1.enabled = true;
-        }
-        if(deathCount == 2)
-        {
-            Skull2.enabled = true;
-        }
-        if(deathCount == 3)
-        {
-            Skull3.enabled = true;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Egel")
@@ -49,7 +30,8 @@ public class PlayerDeath : MonoBehaviour
             IsRespawn = true;
             anim.SetTrigger("death");
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false; 
-            deathCount = deathCount + 1;
+            
+            
     
             
         }
@@ -67,6 +49,8 @@ public class PlayerDeath : MonoBehaviour
 
     void respawn()
     {
+        deathCount++; //het zelfde als (Plankcount + 1)
+        deathText.text = " " + deathCount;
         StartCoroutine(death());
     }
 
