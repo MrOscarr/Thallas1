@@ -11,35 +11,36 @@ public class New_Playermovement : MonoBehaviour
 	
 	public float fallGravityMult; //Multiplier to the player's gravityScale when falling.
 	public float maxFallSpeed; //Maximum fall speed (terminal velocity) of the player when falling.
+    [Range(0f, 1)] public float accelInAir; //Multipliers applied to acceleration rate when airborne.
+	[Range(0f, 1)] public float deccelInAir;
 
+    [Space(10)]
+
+    [Header("Run")]
 	public float runMaxSpeed; //Target speed we want the player to reach.
 	public float runAcceleration; //The speed at which our player accelerates to max speed, can be set to runMaxSpeed for instant acceleration down to 0 for none at all
 	[HideInInspector] public float runAccelAmount; //The actual force (multiplied with speedDiff) applied to the player.
 	public float runDecceleration; //The speed at which our player decelerates from their current speed, can be set to runMaxSpeed
 	[HideInInspector] public float runDeccelAmount; //Actual force (multiplied with speedDiff) applied to the player .
 	
-	[Range(0f, 1)] public float accelInAir; //Multipliers applied to acceleration rate when airborne.
-	[Range(0f, 1)] public float deccelInAir;
 	
-
-	public float jumpHeight; //Height of the player's jump
-	public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the player's gravity and jump force.
-	[HideInInspector] public float jumpForce; //The actual force applied (upwards) to the player when they jump.
-
-    public float dashMaxSpeed;
-    public float dashTimeToApex;
-    [HideInInspector] public float dashForce;
 	
     public float speed = 4f;
     Rigidbody2D rb;
     bool facingRight = true;
+    
 
     bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
 
+    [Space(10)]
 
+    [Header("Jump")]
+    public float jumpHeight; //Height of the player's jump
+	public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the player's gravity and jump force.
+	[HideInInspector] public float jumpForce; //The actual force applied (upwards) to the player when they jump.
     public float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
@@ -48,15 +49,24 @@ public class New_Playermovement : MonoBehaviour
 
     private Animator anim;
 
-    private float activeMoveSpeed = 4f;
+    [Space(10)]
+
+    [Header("Dash")]
+    public float dashMaxSpeed;
+    public float dashTimeToApex;
+    [HideInInspector] public float dashForce;
     public float dashSpeed;
+    private float activeMoveSpeed = 4f;
     public float dashSpeedUp;
     public float dashLength = 0.5f, dashCooldown = 1f;
     private float dashCounter;
     private float dashCoolCounter;
 
-    bool isTouchingFront;
+    [Space(10)]
+
+    [Header("WallJump")]
 	public Transform frontCheck;
+    bool isTouchingFront;
     public LayerMask whatIsMossWall;
 	bool wallSliding;
 	public float wallSlidingSpeed;
@@ -214,18 +224,28 @@ public class New_Playermovement : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.W))
             {
                 anim.SetBool("Dash", true);
+                float forceDash = dashForce;
                 if(dashCoolCounter <=0 && dashCounter <=0)
                 {
-                    speed = dashSpeed;
-                    rb.velocity = new Vector2(transform.localScale.x * speed, rb.velocity.y);
-                    dashCounter = dashLength;
+                    if(input > 0)
+                    {
+                        speed = dashSpeed;
+                        rb.AddForce(Vector2.right * forceDash, ForceMode2D.Impulse);
+                        dashCounter = dashLength;
+                    }
+                    else if (input < 0)
+                    {
+                        speed = dashSpeed;
+                        rb.AddForce(Vector2.left * forceDash, ForceMode2D.Impulse);
+                        dashCounter = dashLength;
+                    }
+                    
                 }
             }
 
         if (dashCounter > 0)
         {
             dashCounter -= Time.deltaTime;
-
             if (dashCounter <= 0 )
             {
                 anim.SetBool("Dash", false);

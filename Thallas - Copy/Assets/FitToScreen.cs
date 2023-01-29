@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class FitToScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Camera mainCamera;
+
     void Start()
     {
-        
-    }
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0);
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(Vector3.zero) * 100;
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(mainCamera.rect.width, mainCamera.rect.height)) * 100;
+        Vector3 screenSize = topRight - bottomLeft;
+        float screenRatio = screenSize.x / screenSize.y;
+        float desiredRatio = transform.localScale.x / transform.localScale.y;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (screenRatio > desiredRatio)
+        {
+            float height = screenSize.y;
+            transform.localScale = new Vector3(height * desiredRatio, height);
+        } else
+        {
+            float width = screenSize.x;
+            transform.localScale = new Vector3(width, width / desiredRatio);
+        }
     }
 }
