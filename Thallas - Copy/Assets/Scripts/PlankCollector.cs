@@ -15,7 +15,6 @@ public class PlankCollector : MonoBehaviour
         {
             Destroy(collision.gameObject);
             PlankCount++; //het zelfde als (Plankcount + 1)
-            Debug.Log(" "+ PlankCount);
             PlankText.text = " " + PlankCount;
         }
     }

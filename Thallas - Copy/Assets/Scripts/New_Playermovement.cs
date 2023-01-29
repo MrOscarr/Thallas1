@@ -101,7 +101,7 @@ public class New_Playermovement : MonoBehaviour
 		runAccelAmount = (50 * runAcceleration) / runMaxSpeed;
 		runDeccelAmount = (50 * runDecceleration) / runMaxSpeed;
 
-		//Calculate jumpForce using the formula (initialJumpVelocity = gravity * timeToJumpApex)
+		
 		jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
 
         dashForce = Mathf.Abs(gravityStrength) * dashTimeToApex;
@@ -229,13 +229,11 @@ public class New_Playermovement : MonoBehaviour
                 {
                     if(input > 0)
                     {
-                        speed = dashSpeed;
                         rb.AddForce(Vector2.right * forceDash, ForceMode2D.Impulse);
                         dashCounter = dashLength;
                     }
                     else if (input < 0)
                     {
-                        speed = dashSpeed;
                         rb.AddForce(Vector2.left * forceDash, ForceMode2D.Impulse);
                         dashCounter = dashLength;
                     }
@@ -259,7 +257,6 @@ public class New_Playermovement : MonoBehaviour
             anim.SetBool("Dash", false);
             dashCoolCounter -= Time.deltaTime;
         }
-
         //END DASH//
 
         //START WALL SlIDING//
