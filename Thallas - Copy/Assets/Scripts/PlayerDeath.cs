@@ -14,7 +14,6 @@ public class PlayerDeath : MonoBehaviour
     private Animator anim;
 
     public bool IsRespawn = false;
-    public bool IsDeath = false;
 
     void Start()
     {
@@ -47,7 +46,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if(collision.tag == "Egel")
         {
-            IsDeath = true;
+            IsRespawn = true;
             anim.SetTrigger("death");
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false; 
             deathCount = deathCount + 1;
@@ -68,8 +67,6 @@ public class PlayerDeath : MonoBehaviour
 
     void respawn()
     {
-        IsDeath = false;
-        IsRespawn = true;
         StartCoroutine(death());
     }
 
