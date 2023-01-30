@@ -25,7 +25,7 @@ TagManager:
   - BGTiles
   - BG
   - Ground
-  - 
+  - Particle
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Particle
+    uniqueID: 2038981093
+    locked: 0
   - name: pauseMenu
     uniqueID: 2879020721
     locked: 0
