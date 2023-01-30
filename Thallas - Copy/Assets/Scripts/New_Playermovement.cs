@@ -246,6 +246,7 @@ public class New_Playermovement : MonoBehaviour
             dashCounter -= Time.deltaTime;
             if (dashCounter <= 0 )
             {
+                
                 anim.SetBool("Dash", false);
                 speed = activeMoveSpeed;
                 dashCoolCounter = dashCooldown;
@@ -254,6 +255,7 @@ public class New_Playermovement : MonoBehaviour
 
         if (dashCoolCounter > 0)
         {
+            
             anim.SetBool("Dash", false);
             dashCoolCounter -= Time.deltaTime;
         }
