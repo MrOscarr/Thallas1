@@ -9,7 +9,6 @@ public class PlayerDeath : MonoBehaviour
     public Image Skull1;
     public static int deathCount = 0;
     [SerializeField] private Text deathText;
-    
 
     private Animator anim;
 
@@ -49,20 +48,20 @@ public class PlayerDeath : MonoBehaviour
 
     void respawn()
     {
-        deathCount++; //het zelfde als (Plankcount + 1)
-        deathText.text = "x" + deathCount;
         StartCoroutine(death());
     }
 
 
     IEnumerator death()
-    {
+    {   
+        deathCount++; //het zelfde als (Plankcount + 1)
+        deathText.text = "x" + deathCount;
         transform.position = respawnPoint;
         anim.SetBool("Run", false);
         anim.SetBool("Idle", false);
         anim.SetBool("Dash", false);
         anim.SetTrigger("respawn");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.8f);
         GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true;
         anim.SetBool("Idle", true);
         IsRespawn = false;
