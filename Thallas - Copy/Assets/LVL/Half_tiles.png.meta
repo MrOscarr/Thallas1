@@ -120,8 +120,8 @@ TextureImporter:
       name: Half_tiles_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 47
+        x: 128
+        y: 120
         width: 16
         height: 16
       alignment: 0
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 1}
-        - {x: -8, y: 1}
+        - {x: 8, y: 0}
+        - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
       spriteID: 46a75bd026756ee44974ed62d45cdaaa
@@ -145,8 +145,8 @@ TextureImporter:
       name: Half_tiles_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 47
+        x: 208
+        y: 120
         width: 16
         height: 16
       alignment: 0
@@ -156,8 +156,8 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 1}
-        - {x: -8, y: 1}
+        - {x: 8, y: 0}
+        - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
       spriteID: 2b329a56756c97c46ad49fe906e032a9
@@ -170,8 +170,8 @@ TextureImporter:
       name: Half_tiles_2
       rect:
         serializedVersion: 2
-        x: 16
-        y: 31
+        x: 112
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -195,8 +195,8 @@ TextureImporter:
       name: Half_tiles_3
       rect:
         serializedVersion: 2
-        x: 32
-        y: 31
+        x: 128
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -220,8 +220,8 @@ TextureImporter:
       name: Half_tiles_4
       rect:
         serializedVersion: 2
-        x: 48
-        y: 31
+        x: 144
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -245,8 +245,8 @@ TextureImporter:
       name: Half_tiles_5
       rect:
         serializedVersion: 2
-        x: 64
-        y: 31
+        x: 160
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -270,8 +270,8 @@ TextureImporter:
       name: Half_tiles_6
       rect:
         serializedVersion: 2
-        x: 112
-        y: 31
+        x: 208
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -295,8 +295,8 @@ TextureImporter:
       name: Half_tiles_7
       rect:
         serializedVersion: 2
-        x: 128
-        y: 31
+        x: 224
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -320,8 +320,8 @@ TextureImporter:
       name: Half_tiles_8
       rect:
         serializedVersion: 2
-        x: 144
-        y: 31
+        x: 240
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -345,8 +345,8 @@ TextureImporter:
       name: Half_tiles_9
       rect:
         serializedVersion: 2
-        x: 160
-        y: 31
+        x: 256
+        y: 104
         width: 16
         height: 16
       alignment: 0
@@ -370,8 +370,8 @@ TextureImporter:
       name: Half_tiles_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 15
+        x: 96
+        y: 88
         width: 16
         height: 16
       alignment: 0
@@ -395,8 +395,8 @@ TextureImporter:
       name: Half_tiles_11
       rect:
         serializedVersion: 2
-        x: 16
-        y: 15
+        x: 176
+        y: 88
         width: 16
         height: 16
       alignment: 0
@@ -405,9 +405,9 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
-        - {x: -8, y: 0}
+        - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: cb6358fada350b847b3a2974d2566589
@@ -420,8 +420,8 @@ TextureImporter:
       name: Half_tiles_12
       rect:
         serializedVersion: 2
-        x: 32
-        y: 15
+        x: 192
+        y: 88
         width: 16
         height: 16
       alignment: 0
@@ -429,10 +429,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: -8}
+      - - {x: 0, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 0}
-        - {x: -8, y: 0}
+        - {x: 8, y: 8}
+        - {x: 0, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: a34bd01448df80249a9f86e33e5786b3
@@ -445,8 +445,8 @@ TextureImporter:
       name: Half_tiles_13
       rect:
         serializedVersion: 2
-        x: 48
-        y: 15
+        x: 272
+        y: 88
         width: 16
         height: 16
       alignment: 0
@@ -455,9 +455,9 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 0}
-        - {x: -8, y: 0}
+        - {x: 0, y: -8}
+        - {x: 0, y: 8}
+        - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: f907cbb047947874f9e677afec89c337
@@ -470,8 +470,8 @@ TextureImporter:
       name: Half_tiles_14
       rect:
         serializedVersion: 2
-        x: 64
-        y: 15
+        x: 112
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -479,8 +479,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 8}
+        - {x: 8, y: 8}
         - {x: 8, y: 0}
         - {x: -8, y: 0}
       tessellationDetail: 0
@@ -495,8 +495,8 @@ TextureImporter:
       name: Half_tiles_15
       rect:
         serializedVersion: 2
-        x: 80
-        y: 15
+        x: 128
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -504,10 +504,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: -8}
-        - {x: 0, y: 8}
+      - - {x: 8, y: 0}
+        - {x: 8, y: 8}
         - {x: -8, y: 8}
-        - {x: -8, y: -8}
+        - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
       spriteID: e9a62dd22bc614245b128348656bc017
@@ -520,8 +520,8 @@ TextureImporter:
       name: Half_tiles_16
       rect:
         serializedVersion: 2
-        x: 96
-        y: 15
+        x: 144
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -529,9 +529,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: 0, y: 8}
-        - {x: 0, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 8}
+        - {x: -8, y: 0}
+        - {x: 8, y: 0}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -545,8 +545,8 @@ TextureImporter:
       name: Half_tiles_17
       rect:
         serializedVersion: 2
-        x: 112
-        y: 15
+        x: 160
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -554,10 +554,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 0}
         - {x: 8, y: 0}
-        - {x: -8, y: 0}
+        - {x: 8, y: 8}
+        - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: f9ca2bbcfc3dea848be30a94513a9aad
@@ -570,8 +570,8 @@ TextureImporter:
       name: Half_tiles_18
       rect:
         serializedVersion: 2
-        x: 128
-        y: 15
+        x: 208
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -579,8 +579,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 8}
+        - {x: 8, y: 8}
         - {x: 8, y: 0}
         - {x: -8, y: 0}
       tessellationDetail: 0
@@ -595,8 +595,8 @@ TextureImporter:
       name: Half_tiles_19
       rect:
         serializedVersion: 2
-        x: 144
-        y: 15
+        x: 224
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -604,8 +604,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 8}
+        - {x: 8, y: 8}
         - {x: 8, y: 0}
         - {x: -8, y: 0}
       tessellationDetail: 0
@@ -620,8 +620,8 @@ TextureImporter:
       name: Half_tiles_20
       rect:
         serializedVersion: 2
-        x: 160
-        y: 15
+        x: 240
+        y: 72
         width: 16
         height: 16
       alignment: 0
@@ -629,14 +629,39 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 8}
+        - {x: 8, y: 8}
         - {x: 8, y: 0}
         - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
       spriteID: f63a334bc39c8b24ca93b18586dfc9b4
       internalID: 1494252123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Half_tiles_21
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 72
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 0}
+        - {x: -8, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c680791bce3350e4b8e352ecf0a88cce
+      internalID: 222965392
       vertices: []
       indices: 
       edges: []
@@ -657,6 +682,7 @@ TextureImporter:
       Half_tiles_2: 1193216924
       Half_tiles_9: -733893559
       Half_tiles_10: -1487950287
+      Half_tiles_21: 222965392
       Half_tiles_16: 151191199
       Half_tiles_17: -1530199279
       Half_tiles_20: 1494252123
