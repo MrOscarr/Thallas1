@@ -257,8 +257,6 @@ public class New_Playermovement : MonoBehaviour
             anim.SetBool("Dash", false);
             dashCoolCounter -= Time.deltaTime;
         }
-
-    
         //END DASH//
 
         //START WALL SlIDING//
