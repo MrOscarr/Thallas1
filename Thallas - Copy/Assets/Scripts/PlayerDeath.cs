@@ -50,7 +50,7 @@ public class PlayerDeath : MonoBehaviour
     void respawn()
     {
         deathCount++; //het zelfde als (Plankcount + 1)
-        deathText.text = " " + deathCount;
+        deathText.text = "x" + deathCount;
         StartCoroutine(death());
     }
 
