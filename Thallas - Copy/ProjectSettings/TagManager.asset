@@ -45,15 +45,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Particle
-    uniqueID: 2038981093
-    locked: 0
-  - name: Ground
-    uniqueID: 3394092839
-    locked: 0
   - name: pauseMenu
     uniqueID: 2879020721
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3394092839
+    locked: 0
+  - name: Props
+    uniqueID: 4178551391
+    locked: 0
+  - name: Portals
+    uniqueID: 389690781
+    locked: 0
+  - name: Collectible
+    uniqueID: 2055937351
+    locked: 0
+  - name: Player
+    uniqueID: 526894019
+    locked: 0
+  - name: Particle
+    uniqueID: 2038981093
     locked: 0
