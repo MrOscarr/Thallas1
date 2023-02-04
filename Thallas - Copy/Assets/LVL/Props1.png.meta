@@ -205,9 +205,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 160
-        y: 240
+        y: 236
         width: 32
-        height: 60
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: Props1_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 192
         y: 236
-        width: 32
-        height: 32
+        width: 63
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,7 +243,28 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props1_7
+      name: Props1_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 236
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86c5092323948ef41bdaa9635ca8951b
+      internalID: -2081830501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Props1_9
       rect:
         serializedVersion: 2
         x: 32
@@ -257,8 +278,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2888790b4efd40c44a9af44141d0da39
-      internalID: 1223840206
+      spriteID: f56288dcbd308bd46a687b9bb67dcbdb
+      internalID: 483233181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Props1_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 236
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8cdd2c6375e3414c808c653de951cbb
+      internalID: 355431054
       vertices: []
       indices: 
       edges: []
@@ -275,14 +317,19 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Props1_0: 1806584674
+      Props1_13: -2120507017
+      Props1_9: 483233181
       Props1_5: 1181230328
       Props1_8: -2081830501
+      Props1_10: 355431054
       Props1_1: 1246666377
       Props1_7: 1223840206
       Props1_2: -1712188004
       Props1_4: -1286694827
       Props1_3: 1991337543
       Props1_6: -1272246431
+      Props1_11: -1745437726
+      Props1_12: -1892108497
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

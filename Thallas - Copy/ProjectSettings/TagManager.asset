@@ -51,11 +51,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
-    uniqueID: 3394092839
+  - name: BGTiles
+    uniqueID: 2296238807
     locked: 0
   - name: Props
     uniqueID: 4178551391
+    locked: 0
+  - name: Ground
+    uniqueID: 3394092839
     locked: 0
   - name: Portals
     uniqueID: 389690781
