@@ -12,6 +12,8 @@ TagManager:
   - Egel
   - Start
   - light
+  - zero
+  - one
   layers:
   - Default
   - TransparentFX
