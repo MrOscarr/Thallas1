@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
                 {
                     GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
                     ResumeGame();
-                    Pause = true;
+                    
                 }
                 else
                 {
@@ -57,7 +57,7 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
-            Pause = false;
+           
         }
         if(playerDeath.IsRespawn == false)
         {
@@ -65,7 +65,7 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;   
-            Pause = false;
+            
         }
     }
 
