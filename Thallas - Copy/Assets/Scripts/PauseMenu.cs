@@ -8,7 +8,9 @@ public class PauseMenu : MonoBehaviour
 
     public static bool isPaused = false;
     public GameObject pauseMenu;
+    public GameObject optionsMenu;
     private PlayerDeath playerDeath;
+    private bool Pause = true;
 
     
     void Awake()
@@ -18,24 +20,30 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Pause == true) 
         {
-            if(isPaused)
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
-                GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
-                ResumeGame();
-            }
-            else
-            {
-                GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
-                PauseGame();
-                
+                if(isPaused)
+                {
+                    GameObject.Find("player").GetComponent<New_Playermovement>().enabled = true; 
+                    ResumeGame();
+                    Pause = true;
+                }
+                else
+                {
+                    GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
+                    PauseGame();
+                    
+                }
             }
         }
+        
     }
 
     public void PauseGame()
     {
+        Pause = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -49,6 +57,7 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
+            Pause = false;
         }
         if(playerDeath.IsRespawn == false)
         {
@@ -56,7 +65,27 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;   
+            Pause = false;
         }
+    }
+
+    public void Options()
+    {
+        Pause = false;
+        GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false;
+        optionsMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public void OptionsBack()
+    {
+        optionsMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+        Pause = true;
     }
 
     public void Menu()

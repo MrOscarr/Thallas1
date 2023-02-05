@@ -14,11 +14,14 @@ public class PlayerDeath : MonoBehaviour
 
     public bool IsRespawn = false;
 
+    private Rigidbody2D rb;
+
     void Start()
     {
         deathCount = 0;
         respawnPoint = transform.position;
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     
@@ -26,6 +29,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if(collision.tag == "Egel")
         {
+            rb.gravityScale = 0;
             IsRespawn = true;
             anim.SetTrigger("death");
             GameObject.Find("player").GetComponent<New_Playermovement>().enabled = false; 
@@ -57,6 +61,7 @@ public class PlayerDeath : MonoBehaviour
         deathCount++; //het zelfde als (Plankcount + 1)
         deathText.text = "x" + deathCount;
         transform.position = respawnPoint;
+        rb.gravityScale = 2.7f;
         anim.SetBool("Run", false);
         anim.SetBool("Idle", false);
         anim.SetBool("Dash", false);
