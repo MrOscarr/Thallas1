@@ -7,7 +7,6 @@ public class New_Playermovement : MonoBehaviour
     
 	[HideInInspector] public float gravityStrength; //Downwards force (gravity) needed for the desired jumpHeight and jumpTimeToApex.
 	[HideInInspector] public float gravityScale; //Strength of the player's gravity as a multiplier of gravity (set in ProjectSettings/Physics2D).
-										  //Also the value the player's rigidbody2D.gravityScale is set to.
 	
 	public float fallGravityMult; //Multiplier to the player's gravityScale when falling.
 	public float maxFallSpeed; //Maximum fall speed (terminal velocity) of the player when falling.
@@ -16,13 +15,15 @@ public class New_Playermovement : MonoBehaviour
 
     [Space(10)]
 
+    
+
     [Header("Run")]
 	public float runMaxSpeed; //Target speed we want the player to reach.
 	public float runAcceleration; //The speed at which our player accelerates to max speed, can be set to runMaxSpeed for instant acceleration down to 0 for none at all
 	[HideInInspector] public float runAccelAmount; //The actual force (multiplied with speedDiff) applied to the player.
 	public float runDecceleration; //The speed at which our player decelerates from their current speed, can be set to runMaxSpeed
 	[HideInInspector] public float runDeccelAmount; //Actual force (multiplied with speedDiff) applied to the player .
-	
+	[SerializeField] private AudioSource WalkSoundEffect;
 	
 	
     public float speed = 4f;
@@ -133,16 +134,18 @@ public class New_Playermovement : MonoBehaviour
 		float movement = speedDif * accelRate;
 
 		rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
-
+        
 
 
         if(input != 0)
         {
             anim.SetBool("Run", true);
+            WalkSoundEffect.Play();
         }
         else
         {
             anim.SetBool("Run", false);
+            WalkSoundEffect.Stop();
         }
 
         if(input > 0 && facingRight == false)

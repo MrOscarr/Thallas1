@@ -14,6 +14,7 @@ TagManager:
   - light
   - zero
   - one
+  - End
   layers:
   - Default
   - TransparentFX
@@ -74,4 +75,7 @@ TagManager:
     locked: 0
   - name: Particle
     uniqueID: 2038981093
+    locked: 0
+  - name: BlackScreen
+    uniqueID: 577428589
     locked: 0
