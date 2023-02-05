@@ -23,7 +23,6 @@ public class New_Playermovement : MonoBehaviour
 	[HideInInspector] public float runAccelAmount; //The actual force (multiplied with speedDiff) applied to the player.
 	public float runDecceleration; //The speed at which our player decelerates from their current speed, can be set to runMaxSpeed
 	[HideInInspector] public float runDeccelAmount; //Actual force (multiplied with speedDiff) applied to the player .
-	[SerializeField] private AudioSource WalkSoundEffect;
 	
 	
     public float speed = 4f;
@@ -140,12 +139,10 @@ public class New_Playermovement : MonoBehaviour
         if(input != 0)
         {
             anim.SetBool("Run", true);
-            WalkSoundEffect.Play();
         }
         else
         {
             anim.SetBool("Run", false);
-            WalkSoundEffect.Stop();
         }
 
         if(input > 0 && facingRight == false)
